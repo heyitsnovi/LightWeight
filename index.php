@@ -1,6 +1,5 @@
 <?php
 
 require_once __DIR__.'/vendor/autoload.php';
-require_once 'config/boot_session.php';
-require_once 'config/boot_database.php';
-require_once 'routes/routes.php';
+require_once __DIR__.'/core/Boot.php';
+require_once __DIR__.'/routes/routes.php';

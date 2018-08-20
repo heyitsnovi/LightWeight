@@ -3,26 +3,27 @@
 namespace App; 
 
 use Illuminate\Database\Capsule\Manager as Capsule;
+use App\Constants;
 
  
-    class Model {
-     
-            public function __construct() {
+class Model {
+ 
+        public function __construct() {
 
-            $capsule = new Capsule();
-            $capsule->addConnection([
-                 'driver' =>    'mysql',
-                 'host' =>      'localhost',
-                 'database' =>  'lightweight',
-                 'username' =>  'root',
-                 'password' =>  '',
-                 'charset' =>   'utf8',
-                 'collation' => 'utf8_unicode_ci',
-                 'prefix' => '',
-            ]);
-            // Setup the Eloquent ORM… 
-            $capsule->bootEloquent();
-    }
+        $capsule = new Capsule();
+        $capsule->addConnection([
+             'driver' =>    'mysql',
+             'host' =>      Constants::DBConfig('MYSQL_HOST'),
+             'database' =>  Constants::DBConfig('MYSQL_DATABASE'),
+             'username' =>  Constants::DBConfig('MYSQL_USERNAME'),
+             'password' =>  Constants::DBConfig('MYSQL_PASSWORD'),
+             'charset' =>   Constants::DBConfig('MYSQL_CHARSET'),
+             'collation' => Constants::DBConfig('MYSQL_COLLATION'),
+             'prefix' =>    Constants::DBConfig('MYSQL_PREFIX'),
+        ]);
+        // Setup the Eloquent ORM… 
+        $capsule->bootEloquent();
+}
  
 }
 

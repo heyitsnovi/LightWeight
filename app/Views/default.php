@@ -23,7 +23,8 @@
 		<div class="msg">
 			<h1>LightWeight</h1>
 		</div>
-		<p class="text-bottom">Memory Usage : <?php  echo $data['memory_usage']; ?> @ PHP Version : <?php echo phpversion(); ?></p>
  
+		<p class="text-bottom">Memory Usage : <?php  echo $data['memory_usage']; ?> @ PHP Version : <?php echo phpversion(); ?></p>
+ 	
 	</body>
 </html>
