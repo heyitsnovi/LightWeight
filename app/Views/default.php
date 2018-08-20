@@ -3,7 +3,7 @@
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Raleway" />
-	<title> Home </title>
+	<title> Home - LightWeight</title>
 </head>
 	<body>
 		<style>
@@ -19,10 +19,17 @@
 			.text-bottom{
 				text-align: center;
 			}
+			.psubtitle{
+				text-align: center;
+				font-size: 16px;
+			}
 		</style>
 		<div class="msg">
 			<h1>LightWeight</h1>
 		</div>
+		<p class="psubtitle">
+			<a target="_blank" href="https://github.com/heyitsnovi/LightWeight">View Project On Github</a>
+		</p>
  
 		<p class="text-bottom">Memory Usage : <?php  echo $data['memory_usage']; ?> @ PHP Version : <?php echo phpversion(); ?></p>
  	
