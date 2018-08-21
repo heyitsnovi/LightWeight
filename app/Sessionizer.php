@@ -38,13 +38,13 @@ class Sessionizer {
 
 		$messages = '';
 
-		if( isset($_SESSION['errors'][$field])){
-			foreach($_SESSION['errors'][$field]  as $errors){
+		if( isset($_SESSION['lightweight_form_errors'][$field])){
+			foreach($_SESSION['lightweight_form_errors'][$field]  as $errors){
 				
 				$messages.=$errors;
 			}
 
-			unset($_SESSION['errors'][$field]);
+			unset($_SESSION['lightweight_form_errors'][$field]);
 		}
 
 		return $messages;

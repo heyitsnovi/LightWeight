@@ -14,7 +14,7 @@ class Redirector{
 
 	public static function redirectWithErrors($url,$errors){
 
-		Sessionizer::set_flash('errors',$errors->toArray());
+		Sessionizer::set_flash('lightweight_form_errors',$errors->toArray());
 		header('location:'.$url);
 		exit;
 	
