@@ -4,7 +4,7 @@
            
         ],
         "files":[
-           
+           "core/Shortcode_functions.php"
         ],
         "psr-4": {
             "App\\": "app/",

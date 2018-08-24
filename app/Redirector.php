@@ -12,9 +12,9 @@ class Redirector{
 		exit;
 	}
 
-	public static function redirectWithErrors($url,$errors){
+	public static function redirectWithErrors($url,$errors = []){
 
-		Sessionizer::set_flash('lightweight_form_errors',$errors->toArray());
+		Sessionizer::set_flash('lightweight_form_errors',is_object($errors) ? $errors->toArray() : []);
 		header('location:'.$url);
 		exit;
 	

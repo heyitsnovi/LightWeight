@@ -9,6 +9,7 @@ class ComposerStaticInit29421c4bcd5dd60a6e639c15f63d6dd3
     public static $files = array (
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
         '72579e7bd17821bb1321b87411366eae' => __DIR__ . '/..' . '/illuminate/support/helpers.php',
+        '6929cb27ca8ed1e83d3b5047ab9f895e' => __DIR__ . '/../..' . '/core/Shortcode_functions.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -157,8 +158,10 @@ class ComposerStaticInit29421c4bcd5dd60a6e639c15f63d6dd3
         'App\\Controllers\\Error' => __DIR__ . '/../..' . '/app/Controllers/Error.php',
         'App\\Controllers\\Home' => __DIR__ . '/../..' . '/app/Controllers/Home.php',
         'App\\Model' => __DIR__ . '/../..' . '/app/Model.php',
+        'App\\Models\\Airplanes' => __DIR__ . '/../..' . '/app/Models/Airplanes.php',
         'App\\Models\\Cities' => __DIR__ . '/../..' . '/app/Models/Cities.php',
         'App\\Models\\LightWeight' => __DIR__ . '/../..' . '/app/Models/LightWeight.php',
+        'App\\Paginator' => __DIR__ . '/../..' . '/app/Paginator.php',
         'App\\Redirector' => __DIR__ . '/../..' . '/app/Redirector.php',
         'App\\Render' => __DIR__ . '/../..' . '/app/Render.php',
         'App\\Sessionizer' => __DIR__ . '/../..' . '/app/Sessionizer.php',
@@ -170,6 +173,8 @@ class ComposerStaticInit29421c4bcd5dd60a6e639c15f63d6dd3
         'Carbon\\Exceptions\\InvalidDateException' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Exceptions/InvalidDateException.php',
         'Carbon\\Laravel\\ServiceProvider' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Laravel/ServiceProvider.php',
         'Carbon\\Translator' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Translator.php',
+        'Core\\Boot' => __DIR__ . '/../..' . '/core/Boot.php',
+        'Core\\Router' => __DIR__ . '/../..' . '/core/Router.php',
         'Doctrine\\Common\\Inflector\\Inflector' => __DIR__ . '/..' . '/doctrine/inflector/lib/Doctrine/Common/Inflector/Inflector.php',
         'Illuminate\\Container\\BoundMethod' => __DIR__ . '/..' . '/illuminate/container/BoundMethod.php',
         'Illuminate\\Container\\Container' => __DIR__ . '/..' . '/illuminate/container/Container.php',
