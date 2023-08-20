@@ -10,7 +10,7 @@
  */
 
 
-namespace App; 
+namespace Core; 
 
 
 class Paginator{
