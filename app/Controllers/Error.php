@@ -2,13 +2,14 @@
 
 namespace App\Controllers;
 
-use App\Render;
+use App\View;
 
 class Error{
 
 
 	public function notFound(){
 
-		Render::show('errors/404');
+		new View('errors/404');
+		
 	}
 }

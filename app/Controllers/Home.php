@@ -2,81 +2,86 @@
 
 namespace App\Controllers;
 
- 
-use App\Constants;
+use Core\Constants;
 use Rakit\Validation\Validator;
-use App\Paginator;
-use App\Models\Airplanes;
- 
+use Core\Paginator;
+use Core\View;
+use Core\Models\Names;
 
 class Home {
-	
-	
-	public function index(){
-		
-		//statistic purposes hehehe
-		$data['memory_usage'] = Constants::get_memory_usage();
-		
-		//display the page in the browser
-		show_page('default',compact('data'));	 
-	}
 
-	public function sayHello($name = null , $lastname = null){
+    public function index() {
 
-		show_page('sayhello',compact('name','lastname'));
-	}
+        //statistic purposes hehehe
+        $data['memory_usage'] = Constants::get_memory_usage();
 
-	public function testForm(){
+        //display the page in the browser
+        new View('default', $data);
 
-		show_page('frmtest');
-	}
+    }
 
-	public function paginationDemo(){
+    public function test_page() {
 
-		$per_page = isset($_GET['perpage']) ? $_GET['perpage'] : 10;
+    	/* Set Page Title */
+        $title = 'Test Page Demo #1';
 
-		$paginator = new Paginator();
+        /* Load Header , Body and Footer Example */
 
-		$paginator::set_config($per_page,'page');
+        new View('demo/tpl/header', ['title' => $title]);
+        new View('demo/test', ['name' => 'Mike' , 'last_name'=>'Maluenda']);
+        new View('demo/tpl/footer');
 
-		$paginator::set_total(Airplanes::count());
+    }
 
+    public function test_form() {
 
-		$data['records'] = 	Airplanes::offset($paginator::get_start())
-									->limit($paginator::get_per_page())
-									->get();
+    	//initialize validator class
+        $validator = new Validator();
 
-		$data['page_links'] = $paginator::page_links('?','&perpage='.(int)$per_page);
+        //initialize form error holder variable
+        $errors = null;
 
-		show_page('pagination_test',compact('data'));
+        //prepare validation rules
+        $validation = $validator->make($_POST, ['name' => 'required|max:50', 'age' => 'required|numeric']);
 
-	}
+        // then validate if form is submitted :) [POST]
+        if (http_method() == 'POST') {
 
-	public function submitTestForm(){
+        	// start validate 
+            $validation->validate();
 
-		$validator  = new Validator();
+            // if validation did not succeeded store error messages in $errors variable and render the page and the errors will appear on the page
 
-		$validation = $validator->make($_POST,
-				[
-					'firstname'=>'required',
-					'lastname'=>'required',
-					'gender'=>'required',
-					'hobby.*'=>'required'
-				]
-			);
+            if ($validation->fails()) {
 
-		$validation->validate();
+                $errors = $validation->errors();
 
-		if ($validation->fails()) {
+                new View('demo/form', ['errors' => $errors]);
 
-				//Redirect to Previous From and Store the Errors
-				redir()::redirectWithErrors(base_url('formtest'),$validation->errors());
-				
-		}else{
-				//If validation succedeed 
-				var_dump($_POST);
-		}
+            }
+            else {
 
-	}
- 
+                // Form successfully submitted :)
+
+                //set flash data message
+                set_flash('message', 'Well Done, ' . anti_xss($_POST['name']));
+
+                //insert data to the database.
+                Names::create(['name' => $_POST['name'], 'age' => $_POST['age']]);
+
+                //redirect to home page
+                redirector()->redirect(base_url());
+            }
+
+        }
+        else {
+
+        	//show initial form state.
+
+            new View('demo/form', ['errors' => $errors]);
+        }
+
+    }
+
 }
+

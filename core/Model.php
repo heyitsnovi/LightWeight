@@ -1,9 +1,9 @@
 <?php
 
-namespace App; 
+namespace Core; 
 
 use Illuminate\Database\Capsule\Manager as Capsule;
-use App\Constants;
+use Core\Constants;
 
  
 class Model {

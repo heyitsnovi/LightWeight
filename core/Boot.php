@@ -2,7 +2,7 @@
 
 namespace Core;	
 
-use App\Model;
+use Core\Model;
 
 class Boot {
 

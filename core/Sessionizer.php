@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace Core;
 
 class Sessionizer {
 
@@ -18,7 +18,7 @@ class Sessionizer {
 		return isset($value) ? $value : '';
 	}
 
-	public static function set_session($session_key,$session_value){
+	public function set_session($session_key,$session_value){
 
 		if(!isset($_SESSION[$session_key])  OR $_SESSION[$session_key] === null){
 			 
@@ -30,7 +30,20 @@ class Sessionizer {
 		}
 	}
 
-	public static function set_flash($session_key,$session_value){
+
+	public function get_session($session_key){
+
+			if(isset($_SESSION[$session_key])){
+
+				return $_SESSION[$session_key];
+			
+			}else{
+
+				return NULL;
+			}
+	}
+
+	public function set_flash($session_key,$session_value){
 
 		if(!isset($_SESSION[$session_key]) OR $_SESSION[$session_key] === null){
 			 $_SESSION[$session_key]	= $session_value;
@@ -39,7 +52,7 @@ class Sessionizer {
 		}	
 	}
 
-	public static function get_flash($session_key){
+	public   function get_flash($session_key){
 
 		$flash_message = isset($_SESSION[$session_key]) ? $_SESSION[$session_key] : '';
 		unset($_SESSION[$session_key]);
@@ -48,7 +61,7 @@ class Sessionizer {
 	}
 
 
-	public static function form_errors($field){
+	public function form_errors($field){
 
 		$messages = '';
 

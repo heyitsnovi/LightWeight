@@ -1,9 +1,9 @@
 <?php
-namespace App;
+namespace Core;
 
 class Url {
 
-	public static function base_url($ext = ''){
+	public  function base_url($ext = ''){
 
 		 $config = parse_ini_file('././.env');
 		

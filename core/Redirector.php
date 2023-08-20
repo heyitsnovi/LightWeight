@@ -1,18 +1,18 @@
 <?php
 
-namespace App;
+namespace Core;
 
-use App\Sessionizer;
+use Core\Sessionizer;
 use Rakit\Validation\Validator;
 
 class Redirector{
 
-	public static function redirect($url){
+	public  function redirect($url){
 		header('location:'.$url);
 		exit;
 	}
 
-	public static function redirectWithErrors($url,$errors = []){
+	public  function redirectWithErrors($url,$errors = []){
 
 		Sessionizer::set_flash('lightweight_form_errors',is_object($errors) ? $errors->toArray() : []);
 		header('location:'.$url);

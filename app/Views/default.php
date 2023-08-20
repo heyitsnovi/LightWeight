@@ -24,9 +24,11 @@
 				font-size: 16px;
 			}
 		</style>
+	
 		<div class="msg">
 			<h1>LightWeight</h1>
 		</div>
+		<p class="psubtitle">	<?php echo get_flash('message'); ?></p>
 		<p class="psubtitle">
 			<a target="_blank" href="https://github.com/heyitsnovi/LightWeight">View Project On Github</a>
 		</p>

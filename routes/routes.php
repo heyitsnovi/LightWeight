@@ -10,13 +10,12 @@ $router = Router::createRoutes();
 //===============================================================
 
 $router->get('/','\App\Controllers\Home@index');
-$router->get('/hello/(\w+)/(\w+)','\App\Controllers\Home@sayHello');
-$router->get('/formtest','\App\Controllers\Home@testForm');
-$router->get('/paginate-demo','\App\Controllers\Home@paginationDemo');
-
-$router->post('/submitformtest','\App\Controllers\Home@submitTestForm');
 
 
+$router->get('/testpage','App\Controllers\Home@test_page');
+
+
+$router->all('/testform','App\Controllers\Home@test_form');
 
 
 
