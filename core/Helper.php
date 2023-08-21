@@ -15,9 +15,11 @@ function base_url($ext = ''){
 }
 
 
-function redirector(){
+function redirect($url){
 
-		return new Redir();
+		$redir_obj =  new Redir();
+
+		return $redir_obj->redirect($url);
 }
 
 function field_error($field_name){
@@ -29,7 +31,7 @@ function field_error($field_name){
 
 function http_method(){
 
-	return strip_tags($_SERVER['REQUEST_METHOD']);
+	return anti_xss($_SERVER['REQUEST_METHOD']);
 }
 
 
@@ -42,7 +44,7 @@ function set_session($key,$value){
 }
 
 
-function set_flash($key,$value){
+function set_flash_data($key,$value){
 
 		$sessionizer = new Sessionizer();
 

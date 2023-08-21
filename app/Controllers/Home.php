@@ -4,7 +4,6 @@ namespace App\Controllers;
 
 use Core\Constants;
 use Rakit\Validation\Validator;
-use Core\Paginator;
 use Core\View;
 use Core\Models\Names;
 
@@ -64,13 +63,13 @@ class Home {
                 // Form successfully submitted :)
 
                 //set flash data message
-                set_flash('message', 'Well Done, ' . anti_xss($_POST['name']));
+                set_flash_data('message', 'Well Done, ' . anti_xss($_POST['name']));
 
                 //insert data to the database.
                 Names::create(['name' => $_POST['name'], 'age' => $_POST['age']]);
 
                 //redirect to home page
-                redirector()->redirect(base_url());
+                redirect(base_url());
             }
 
         }
