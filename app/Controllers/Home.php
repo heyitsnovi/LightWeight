@@ -40,6 +40,9 @@ class Home {
         //initialize form error holder variable
         $errors = null;
 
+        //set page title
+        $page_title = 'Guest Form';
+
         //prepare validation rules
         $validation = $validator->make($_POST, ['name' => 'required|max:50', 'age' => 'required|numeric']);
 
@@ -55,7 +58,7 @@ class Home {
 
                 $errors = $validation->errors();
 
-                new View('demo/form', ['errors' => $errors]);
+                new View('demo/form', ['errors' => $errors,'page_title'=>$page_title]);
 
             }
             else {
@@ -77,7 +80,7 @@ class Home {
 
         	//show initial form state.
 
-            new View('demo/form', ['errors' => $errors]);
+            new View('demo/form', ['errors' => $errors,'page_title'=>$page_title]);
         }
 
     }

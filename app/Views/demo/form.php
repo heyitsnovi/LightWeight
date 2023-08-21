@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Test Form</title>
+	<title><?= $page_title ?></title>
 </head>
 <body>
 		<form method="POST" action="<?= base_url('testform') ?>">
