@@ -2,7 +2,7 @@
 
 namespace App\Controllers;
 
-use App\View;
+use Core\View;
 
 class Error{
 

@@ -2,14 +2,14 @@
 <html>
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Raleway" />
+	<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Roboto" />
 	<title> Home - LightWeight</title>
 </head>
 	<body>
 		<style>
 			body{
 				background-color: #e9ebee;
-				font-family: 'Raleway';
+				font-family: 'Roboto';
 			}
 			.msg{
 				text-align: center;

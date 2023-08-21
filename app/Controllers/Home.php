@@ -28,7 +28,7 @@ class Home {
         /* Load Header , Body and Footer Example */
 
         new View('demo/tpl/header', ['title' => $title]);
-        new View('demo/test', ['name' => 'Mike' , 'last_name'=>'Maluenda']);
+        new View('demo/test', ['name' => 'HeyIts' , 'last_name'=>'Novi']);
         new View('demo/tpl/footer');
 
     }
