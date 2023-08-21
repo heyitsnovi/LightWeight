@@ -78,3 +78,13 @@ function anti_xss($input){
 	return $xss_cleaner->xss_clean($input);
 }
 
+
+function input_value($key){
+
+		$sessionizer = new Sessionizer();
+
+		$value = $sessionizer->input_value($key);
+
+		return anti_xss($value);
+}
+

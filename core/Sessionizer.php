@@ -77,5 +77,21 @@ class Sessionizer {
 		return $messages;
 	}
 
+
+	public function input_value($key){
+
+			if(isset($_SESSION['post_data_'.$key])){
+
+				$val = $_SESSION['post_data_'.$key];
+
+				return $val;
+
+			}else{
+
+				return NULL;
+			}
+	
+	}
+
 	 
 }

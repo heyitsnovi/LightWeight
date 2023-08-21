@@ -9,6 +9,7 @@ class Boot {
 	public function __construct(){
 
 		self::initializeSession();
+		self::cachePostData();
 		new Model();
 		
 	}
@@ -19,6 +20,33 @@ class Boot {
 
 			session_start();
 		}
+	}
+
+	protected static function cachePostData(){
+
+		$request_method = $_SERVER['REQUEST_METHOD'];
+
+			if($request_method == 'POST'){
+
+				foreach($_POST as $key => $value){
+
+					$_SESSION['post_data_'.$key] = $value;
+						 
+				}
+
+			}else{
+
+				foreach ($_SESSION as $key=>$val) {
+	 
+				  if (strpos($key, 'post_data_') === 0) {
+				  
+				  	  unset($_SESSION[$key]);
+
+				  }
+
+				}
+			}
+			
 	}
 
 }
