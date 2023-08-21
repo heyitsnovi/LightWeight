@@ -35,8 +35,62 @@ MYSQL_COLLATION = utf8_unicode_ci
 MYSQL_PREFIX	= 
 
 ```
+After setting up your .env file, Go to your browser and type:
 
+```
+http://localhost/LightWeight/
 
+```
+Sample Pages:
+
+```
+HOME:
+http://localhost/LightWeight/ 
+
+TEST Pages
+http://localhost/LightWeight/testpage
+
+TEST FORM
+http://localhost/LightWeight/testform
+```
+
+Router File location:
+
+```
+routes/routes.php
+
+```
+
+Default Controller location:
+
+```
+app/controllers/Home.php
+```
+
+Default Models location:
+
+```
+app/models/Names.php
+```
+
+Default Views location:
+
+```
+app/views/default.php
+
+```
+
+Demo Views location:
+
+```
+app/views/demo
+```
+
+Default 404 View location:
+
+```
+app/views/errors/404.php
+```
     
 ## Features
 
