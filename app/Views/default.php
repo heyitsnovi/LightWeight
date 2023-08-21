@@ -23,12 +23,16 @@
 				text-align: center;
 				font-size: 16px;
 			}
+			.small{
+				text-align: center;
+			}
 		</style>
 	
 		<div class="msg">
 			<h1>LightWeight</h1>
 		</div>
 		<p class="psubtitle">	<?php echo get_flash('message'); ?></p>
+		<p class="small">A lightweight MVC Framework</p>
 		<p class="psubtitle">
 			<a target="_blank" href="https://github.com/heyitsnovi/LightWeight">View Project On Github</a>
 		</p>

@@ -7,6 +7,12 @@ use Rakit\Validation\Validator;
 use Core\View;
 use Core\Models\Names;
 
+
+/*
+* Demo Application For Starters
+* Please make sure to import the sample_db/lightweight_demo.sql file in order to run this application 
+*/
+
 class Home {
 
     public function index() {
