@@ -10,8 +10,8 @@
             "App\\": "app/",
             "App\\Controllers\\": "app/controllers",
             "Core\\Models\\":       "app/models",
-            "Core\\":"core/"
-       
+            "Core\\":"core/",
+            "Libraries\\":"app/libraries"
         }
     },
 	"require": {
