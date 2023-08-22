@@ -38,6 +38,12 @@ class Home {
 
     }
 
+
+    public function say_name($firstname,$lastname){
+
+        echo $firstname . ' '.$lastname;
+    }
+
     public function test_form() {
 
     	//initialize validator class
