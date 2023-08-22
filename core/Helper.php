@@ -85,3 +85,10 @@ function is_ajax() {
     return isset($_SERVER['HTTP_X_REQUESTED_WITH']) && $_SERVER['HTTP_X_REQUESTED_WITH'] === 'XMLHttpRequest';
 }
 
+
+function base_path(){
+
+    $basepath =  dirname(__FILE__,2);
+
+    return anti_xss($basepath);
+}
