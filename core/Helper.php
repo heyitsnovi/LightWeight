@@ -102,13 +102,13 @@ function form_dropdown($data = '', $options = array(), $selected = array(), $ext
         if (isset($data['selected']))
         {
             $selected = $data['selected'];
-            unset($data['selected']); // select tags don't have a selected attribute
+            unset($data['selected']); 
         }
 
         if (isset($data['options']))
         {
             $options = $data['options'];
-            unset($data['options']); // select tags don't use an options attribute
+            unset($data['options']); 
         }
     }
     else
@@ -119,7 +119,7 @@ function form_dropdown($data = '', $options = array(), $selected = array(), $ext
     is_array($selected) OR $selected = array($selected);
     is_array($options) OR $options = array($options);
 
-    // If no selected state was submitted we will attempt to set it automatically
+   
     if (empty($selected))
     {
         if (is_array($data))
