@@ -1,3 +1,12 @@
+<?php
+	$options = array(
+	''				=>'',	
+	'small'         => 'Small Shirt',
+	'med'           => 'Medium Shirt',
+	'large'         => 'Large Shirt',
+	'xlarge'        => 'Extra Large Shirt',
+);
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,6 +24,10 @@
 					<?= $errors!==NULL ? $errors->first('age') : '' ?>
 				</label>
 				<br>
+				<?php
+					echo form_dropdown('shirts', $options, anti_xss($_POST['shirts']));
+					echo $errors!==NULL ? $errors->first('shirts') : '';
+				?>
 				<button type="submit"> Submit </button>
 		</form>
 	</body>

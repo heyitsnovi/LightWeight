@@ -56,7 +56,7 @@ class Home {
         $page_title = 'Guest Form';
 
         //prepare validation rules
-        $validation = $validator->make($_POST, ['name' => 'required|max:50', 'age' => 'required|numeric']);
+        $validation = $validator->make($_POST, ['name' => 'required|max:50', 'age' => 'required|numeric', 'shirts'=>'required']);
 
         // then validate if form is submitted :) [POST]
         if (http_method() == 'POST') {
