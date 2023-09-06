@@ -222,3 +222,17 @@ function _parse_form_attributes($attributes, $default) {
     return $att;
 }
 
+function title_to_slug($title) {
+    
+    $slug = strtolower(str_replace(' ', '-', $title));
+    
+    $slug = preg_replace('/[^\w\-]/', '', $slug);
+    
+    $slug = preg_replace('/\-+/', '-', $slug);
+
+    $slug = trim($slug, '-');
+    
+    return $slug;
+}
+
+
