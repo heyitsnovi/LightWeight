@@ -235,4 +235,16 @@ function title_to_slug($title) {
     return $slug;
 }
 
+function postData($index_name){
 
+    $_POST  = filter_input_array(INPUT_POST, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
+    return $_POST[$index_name];
+}
+
+function getData($index_name){
+
+    $_GET  = filter_input_array(INPUT_GET, FILTER_SANITIZE_STRING);
+
+    return $_GET[$index_name];
+}

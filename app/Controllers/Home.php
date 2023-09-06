@@ -78,10 +78,10 @@ class Home {
                 // Form successfully submitted :)
 
                 //set flash data message
-                set_flash_data('message', 'Well Done, ' . anti_xss($_POST['name']));
+                set_flash_data('message', 'Well Done, ' . postData('name'));
 
                 //insert data to the database.
-                Names::create(['name' => $_POST['name'], 'age' => $_POST['age']]);
+                Names::create(['name' => postData('name'), 'age' => postData('age')]);
 
                 //redirect to home page
                 redirect(base_url());
