@@ -22,6 +22,7 @@ class Model {
              'prefix' =>    Constants::DBConfig('MYSQL_PREFIX'),
         ]);
         // Setup the Eloquent ORM… 
+        $capsule->setAsGlobal(); 
         $capsule->bootEloquent();
 }
  
