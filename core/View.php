@@ -2,6 +2,8 @@
 
 namespace Core;
 
+use Core\Constants;
+
 class View {
 
 	private   $data = [];
@@ -20,11 +22,11 @@ class View {
 					}
 				}
 
-				if(file_exists('././app/views/'. $view .'.php')){
+				if(file_exists(Constants::views_dir().'/'. $view .'.php')){
 					
 					extract($this->pageVars);
 					ob_start();
-					require_once '././app/views/'. $view .'.php';
+					require_once Constants::views_dir().'/'. $view .'.php';
 					echo ob_get_clean();
 
 				}else{

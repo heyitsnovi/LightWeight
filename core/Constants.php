@@ -31,4 +31,9 @@ class Constants{
 
 		return str_replace('core','app',__DIR__);
 	}
+
+	 public static function views_dir(){
+
+		return str_replace('core','app/views',__DIR__);
+	}
 }

@@ -4,20 +4,6 @@ namespace Core;
 
 class Sessionizer {
 
-	public function old_val($field){
-
-		$value = '';
-
-		if( isset($_SESSION['prev_inputs'][$field])){
- 			
- 			$value = $_SESSION['prev_inputs'][$field];
-
-			unset($_SESSION['prev_inputs'][$field]);
-		}
-
-		return isset($value) ? $value : '';
-	}
-
 	public function set_session($session_key,$session_value){
 
 		if(!isset($_SESSION[$session_key])  OR $_SESSION[$session_key] === null){

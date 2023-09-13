@@ -20,6 +20,9 @@ $router->all('/testform','App\Controllers\Home@test_form');
 
 $router->get('/say-name/{first_name}/{last_name}','App\Controllers\Home@say_name');
 
+$router->get('/twigified-example','App\Controllers\Home@twigifiedExample');
+
+
 //===============================================================
 
 //  define your 404 page handler :

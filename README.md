@@ -1,4 +1,3 @@
-
 # LightWeight
 
 A Lightweight,Simple PHP MVC Mini Framework. Built for Rapid Prototyping and Small-Scaled Projects.
@@ -20,7 +19,7 @@ composer install
 ```
 Wait until all packages gets installed.
 
-After Installation configure the .env file with your database credentials and  PROJECT_BASEURL
+After Installation configure the .env file with your database credentials and  PROJECT_BASEURL. Please modify these settings according to your set-up.
 
 ```
 # Please Modify These Settings According To Your Set Up
@@ -52,6 +51,9 @@ http://localhost/LightWeight/testpage
 
 TEST FORM
 http://localhost/LightWeight/testform
+
+TEST View Using Twig Templating Engine
+http://localhost/Lightweight/twigified-example
 ```
 
 Router File location:
@@ -61,26 +63,26 @@ routes/routes.php
 
 ```
 
-Default Controller location:
+Default Controller File location:
 
 ```
 app/controllers/Home.php
 ```
 
-Default Models location:
+Default Models File location:
 
 ```
 app/models/Names.php
 ```
 
-Default Views location:
+Default Views File location:
 
 ```
 app/views/default.php
 
 ```
 
-Demo Views location:
+Demo Views location (Both Ordinary Views and Twig Template):
 
 ```
 app/views/demo
@@ -102,6 +104,10 @@ app/views/errors/404.php
 
 - Anti XSS Library by Voku (voku/anti-xss)
 
+- Twig Templating Engine Ready
+
+- Built-In Pagination Class
+
 
 ## License
 
@@ -111,7 +117,13 @@ app/views/errors/404.php
 ## Acknowledgements
 
  - [Bramus Router](https://github.com/bramus/router)
- - [Rakit Validation](https://github.com/rakit/validation)
- - [Illuminate Database](https://github.com/illuminate/database)
+ - [Rakit Form Validation Library](https://github.com/rakit/validation)
+ - [Laravel Illuminate Database](https://github.com/illuminate/database)
  - [Voku Anti XSS](https://github.com/voku/anti-xss)
+ - [Twig Templating Engine](https://github.com/twigphp/Twig)
+ - [David Carr's Pagination Library](https://github.com/dcblogdev/pagination)
+ 
+## Feedback
+
+If you have any feedback, suggestions or any ideas that might be helpful, please reach out to me at novhex94@gmail.com
 

@@ -6,6 +6,7 @@ use Core\Constants;
 use Rakit\Validation\Validator;
 use Core\View;
 use Core\Models\Names;
+use Core\Twigified;
 
 
 /*
@@ -94,6 +95,26 @@ class Home {
 
             new View('demo/form', ['errors' => $errors,'page_title'=>$page_title]);
         }
+
+    }
+
+    //This is an example how to use the Twigified class . It uses Twig as a templating engine.
+    public function twigifiedExample(){
+
+        /* Twigified will accept an array of options for example:
+        *  $twig = new Twigified(['cache'=>'/path/to/cache/folder']);
+        *  For more info regarding  options , please refer  this link:  https://twig.symfony.com/doc/3.x/api.html#environment-options
+        */
+
+        $twig = new Twigified();
+
+        $arr = [
+                'name'=>'Novi',
+                'page_title'=>'Twig Demo View',
+                'country'=>'Philippines'
+        ];
+
+        echo $twig->view()->render('demo/twig-demo.html',$arr);
 
     }
 
