@@ -21,4 +21,14 @@ class Constants{
 
 		return $config[$config_item];
 	}
+
+	public static function root_path(){
+
+		return str_replace('core','',__DIR__);
+	}
+
+	public static function app_dir(){
+
+		return str_replace('core','app',__DIR__);
+	}
 }
