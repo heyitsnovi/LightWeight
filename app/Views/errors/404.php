@@ -54,6 +54,6 @@
 			<img src="<?= base_url('assets/sad-emoji.svg') ?>" class="img-emoji">
 			<p class="msg-inner">Hmmm looks like the URL you visited does not exits. Go back <a class="link" href="<?= base_url() ?>">Home</a> </p>
 		</div>
-		<div class="credits">Sad Icon by <a href='https://worldvectorlogo.com/logo/facebook-reaction-sad'>WorldVectorLogo</a></div>
+		<div class="credits">Sad Icon by <a class="link" href='https://worldvectorlogo.com/logo/facebook-reaction-sad'>WorldVectorLogo</a></div>
 	</body>
 </html>
