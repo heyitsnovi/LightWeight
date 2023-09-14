@@ -4,46 +4,60 @@
  *
  * @author David Carr - dave@daveismyname.com - http://www.daveismyname.com
  * @version 1.0
- * @modified by: heyitsnovi - http://github.com/heyitsnovi
- * @date August 24, 2018
- * Bootstrap 4 Compatible
+ * @date October 20, 2012
+ * @modified by Heyitsnovi - https://github.com/heyitsnovi
+ * @date_modified: September 09 2023
+ * @notes: Modify pagination class in order to work with boostrap 5
  */
 
-
-namespace Libraries; 
-
+namespace Libraries;
 
 class Paginator{
+
         /**
 	 * set the number of items per page.
 	 *
 	 * @var numeric
 	*/
-	private static $_perPage;
+	private $_perPage;
+
 	/**
 	 * set get parameter for fetching the page number
 	 *
 	 * @var string
 	*/
-	private static $_instance;
+	private $_instance;
+
 	/**
 	 * sets the page number.
 	 *
 	 * @var numeric
 	*/
-	private static $_page;
+	private $_page;
+
 	/**
 	 * set the limit for the data source
 	 *
 	 * @var string
 	*/
-	private static $_limit;
+	private $_limit;
+
 	/**
 	 * set the total number of records/items.
 	 *
 	 * @var numeric
 	*/
-	private static $_totalRows = 0;
+	private $_totalRows = 0;
+	
+	/**
+	 * set custom css classes for additional flexibility
+	 *
+	 * @var sting
+	*/
+	private $_customCSS;
+
+
+
 	/**
 	 *  __construct
 	 *  
@@ -52,38 +66,23 @@ class Paginator{
 	 * @param numeric  $_perPage  sets the number of iteems per page
 	 * @param numeric  $_instance sets the instance for the GET parameter
 	 */
-
-	private static $db_start ;
-	private static $db_limit;
-
-	public function __construct(){
-	
+	public function __construct($perPage, $instance, $customCSS = ''){
+		$this->_instance = $instance;		
+		$this->_perPage = $perPage;
+		$this->set_instance();
+		$this->_customCSS = $customCSS;	
 	}
 
-	/**
-	 *  set_config
-	 *  
-	 *  set configuration for pagination
-	 *  
-	 * @param numeric  $_perPage  sets the number of iteems per page
-	 * @param numeric  $_instance sets the instance for the GET parameter
-	 */
-
-	public static  function set_config($perPage=10,$instance='p'){
-
-		self::$_instance = $instance;		
-		self::$_perPage = $perPage;
-		self::set_instance();	
-	}
 	/**
 	 * get_start
 	 *
 	 * creates the starting point for limiting the dataset
 	 * @return numeric
 	*/
-	public static function get_start(){
-		return (self::$_page * self::$_perPage) - self::$_perPage;
+	public function get_start(){
+		return ($this->_page * $this->_perPage) - $this->_perPage;
 	}
+
 	/**
 	 * set_instance
 	 * 
@@ -91,12 +90,11 @@ class Paginator{
 	 *
 	 * @var numeric
 	*/
-	private static function set_instance(){
-
-		self::$_page = (int) (!isset($_GET[self::$_instance]) ? 1 : $_GET[self::$_instance]); 
-		self::$_page = (self::$_page == 0 || self::$_page <= -1 ? 1 : self::$_page);
-
+	private function set_instance(){
+		$this->_page = (int) (!isset($_GET[$this->_instance]) ? 1 : $_GET[$this->_instance]); 
+		$this->_page = ($this->_page == 0 ? 1 : ($this->_page < 0 ? 1 : $this->_page));
 	}
+
 	/**
 	 * set_total
 	 *
@@ -104,9 +102,10 @@ class Paginator{
 	 *
 	 * @var numeric
 	*/
-	public static function set_total($_totalRows){
-		self::$_totalRows = $_totalRows;
+	public function set_total($_totalRows){
+		$this->_totalRows = $_totalRows;
 	}
+
 	/**
 	 * get_limit
 	 *
@@ -114,22 +113,20 @@ class Paginator{
 	 * 
 	 * @return string
 	*/
-	public static  function get_limit(){
-        return self::get_start().",".self::$_perPage;
-    }
-
+	public function get_limit(){
+        	return "LIMIT ".$this->get_start().",$this->_perPage";
+        }
+	
 	/**
-	 * get_per_page
-	 *
-	 * returns the number of items per page
-	 * 
-	 * @return numberic
-	*/
-    public function get_per_page(){
-
-    	return self::$_perPage;
-
-    }
+     	* get_limit_keys
+     	*
+     	* returns an array of the offset and limit returned on each call
+     	*
+     	* @return string
+    	*/
+    	public function get_limit_keys(){
+        	return ['offset' => $this->get_start(), 'limit' => $this->_perPage];
+    	}
 
         /**
          * page_links
@@ -140,88 +137,79 @@ class Paginator{
          * @var sting $ext optionally pass in extra parameters to the GET
          * @return string returns the html menu
         */
-	public  static function page_links($path='?',$ext=null)
-	{
+	public function page_links($path = '?', $ext = null)
+    {
+        $adjacents = "2";
+        $prev      = $this->_page - 1;
+        $next      = $this->_page + 1;
+        $lastpage  = ceil($this->_totalRows / $this->_perPage);
+        $lpm1      = $lastpage - 1;
 
-		if($path === '' || $path==null || !isset($path) || $path!=='?'){
-				
-			$path = '?';
-		}
+        $pagination = "";
+        if ($lastpage > 1) {
+            $pagination .= "<ul class='pagination ".$this->_customCSS."'>";
+            if ($this->_page > 1) {
+                $pagination .= "<li class=\"page-item\"><a class=\"page-link\"href='".$path."$this->_instance=$prev"."$ext'>Previous</a></li>";
+            } else {
+                $pagination .= "<li><span class='disabled page-link'>Previous</span></li>";
+            }
 
-	    $adjacents = "2";
-	    $prev = self::$_page - 1;
-	    $next = self::$_page + 1;
-	    $lastpage = ceil(self::$_totalRows/self::$_perPage);
-	    $lpm1 = $lastpage - 1;
-	    $pagination = "";
-		if($lastpage > 1)
-		{   
-		    $pagination .= "<ul class='pagination'>";
-		if (self::$_page > 1)
-		    $pagination.= "<li class='page-item'><a class='page-link' href='".$path.self::$_instance."=$prev"."$ext'>&laquo; Previous</a></li>";
-		else
-		    $pagination.= "<span class='disabled' style='display:none;'>Previous</span>";   
-		if ($lastpage < 7 + ($adjacents * 2))
-		{   
-		for ($counter = 1; $counter <= $lastpage; $counter++)
-		{
-		if ($counter == self::$_page)
-		    $pagination.= "<li class='page-item active' ><a class='page-link'>".$counter."</a></li>";
-		else
-		    $pagination.= "<li class='page-item'><a class='page-link' href='".$path.self::$_instance."=$counter"."$ext'>$counter</a></li>";                   
-		}
-		}
-		elseif($lastpage > 5 + ($adjacents * 2))
-		{
-		if(self::$_page < 1 + ($adjacents * 2))       
-		{
-		for ($counter = 1; $counter < 4 + ($adjacents * 2); $counter++)
-		{
-		if ($counter == self::$_page)
-		    $pagination.= "<li  class='active'><span class='current'>$counter</span></li>";
-		else
-		    $pagination.= "<li class='page-item'><a class='page-link' href='".$path.self::$_instance."=$counter"."$ext'>$counter</a></li>";                   
-		}
-		    $pagination.= "...";
-		    $pagination.= "<li class='page-item'><a class='page-link' href='".$path.self::$_instance."=$lpm1"."$ext'>$lpm1</a></li>";
-		    $pagination.= "<li class='page-item'><a class='page-link' href='".$path.self::$_instance."=$lastpage"."$ext'>$lastpage</a></li>";       
-		}
-		elseif($lastpage - ($adjacents * 2) > self::$_page && self::$_page > ($adjacents * 2))
-		{
-		    $pagination.= "<li class='page-item'><a class='page-link' href='".$path.self::$_instance."=1"."$ext'>1</a></li>";
-		    $pagination.= "<li class='page-item'><a class='page-link' href='".$path.self::$_instance."=2"."$ext'>2</a></li>";
-		    $pagination.= "...";
-		for ($counter = self::$_page - $adjacents; $counter <= self::$_page + $adjacents; $counter++)
-		{
-		if ($counter == self::$_page)
-		    $pagination.= "<span class='current'>$counter</span>";
-		else
-		    $pagination.= "<li class='page-item'><a class='page-link' href='".$path.self::$_instance."=$counter"."$ext'>$counter</a></li>";                   
-		}
-		    $pagination.= "..";
-		    $pagination.= "<li class='page-item'><a class='page-link' href='".$path.self::$_instance."=$lpm1"."$ext'>$lpm1</a></li>";
-		    $pagination.= "<li class='page-item'><a class='page-link' href='".$path.self::$_instance."=$lastpage"."$ext'>$lastpage</a></li>";       
-		}
-		else
-		{
-		    $pagination.= "<li class='page-item'><a class='page-link' href='".$path.self::$_instance."=1"."$ext'>1</a></li>";
-		    $pagination.= "<li class='page-item'><a class='page-link' href='".$path.self::$_instance."=2"."$ext'>2</a></li>";
-		    $pagination.= "..";
-		for ($counter = $lastpage - (2 + ($adjacents * 2)); $counter <= $lastpage; $counter++)
-		{
-		if ($counter == self::$_page)
-		    $pagination.= "<span class='current'>$counter</span>";
-		else
-		    $pagination.= "<li class='page-item'><a class='page-link' href='".$path.self::$_instance."=$counter"."$ext'>$counter</a></li>";                   
-		}
-		}
-		}
-		if (self::$_page < $counter - 1)
-		    $pagination.= "<li class='page-item'><a class='page-link' href='".$path.self::$_instance."=$next"."$ext'>Next &raquo;</a></li>";
-		else
-		    $pagination.= "<li class='page-item'><span class='disabled' style='display:none;'>Next</span></li>";
-		    $pagination.= "</ul>\n";       
-		}
-	return $pagination;
-	}
+            if ($lastpage < 7 + ($adjacents * 2)) {
+                for ($counter = 1; $counter <= $lastpage; $counter++) {
+                    if ($counter == $this->_page) {
+                        $pagination .= "<li class=\"page-item active\"><span class='current page-link'>$counter</span></li>";
+                    } else {
+                        $pagination .= "<li class=\"page-item\"><a class=\"page-link\"href='".$path."$this->_instance=$counter"."$ext'>$counter</a></li>";
+                    }
+                }
+            } elseif ($lastpage > 5 + ($adjacents * 2)) {
+                if ($this->_page < 1 + ($adjacents * 2)) {
+                    for ($counter = 1; $counter < 4 + ($adjacents * 2); $counter++) {
+                        if ($counter == $this->_page) {
+                            $pagination .= "<li class=\"page-item active\"><span class='current page-link'>$counter</span></li>";
+                        } else {
+                            $pagination .= "<li class=\"page-item\"><a class=\"page-link\"href='".$path."$this->_instance=$counter"."$ext'>$counter</a></li>";
+                        }
+                    }
+                    $pagination .= "...";
+                    $pagination .= "<li class=\"page-item\"><a class=\"page-link\"href='".$path."$this->_instance=$lpm1"."$ext'>$lpm1</a></li>";
+                    $pagination .= "<li class=\"page-item\"><a class=\"page-link\"href='".$path."$this->_instance=$lastpage"."$ext'>$lastpage</a></li>";
+                } elseif ($lastpage - ($adjacents * 2) > $this->_page && $this->_page > ($adjacents * 2)) {
+                    $pagination .= "<li class=\"page-item\"><a class=\"page-link\"href='".$path."$this->_instance=1"."$ext'>1</a></li>";
+                    $pagination .= "<li class=\"page-item\"><a class=\"page-link\"href='".$path."$this->_instance=2"."$ext'>2</a></li>";
+                    $pagination .= "...";
+                    for ($counter = $this->_page - $adjacents; $counter <= $this->_page + $adjacents; $counter++) {
+                        if ($counter == $this->_page) {
+                            $pagination .= "<li class=\"page-item active\"><span class='current page-link'>$counter</span></li>";
+                        } else {
+                            $pagination .= "<li class=\"page-item\"><a class=\"page-link\"href='".$path."$this->_instance=$counter"."$ext'>$counter</a></li>";
+                        }
+                    }
+                    $pagination .= "..";
+                    $pagination .= "<li class=\"page-item\"><a class=\"page-link\"href='".$path."$this->_instance=$lpm1"."$ext'>$lpm1</a></li>";
+                    $pagination .= "<li class=\"page-item\"><a class=\"page-link\"href='".$path."$this->_instance=$lastpage"."$ext'>$lastpage</a></li>";
+                } else {
+                    $pagination .= "<li class=\"page-item\"><a class=\"page-link\"href='".$path."$this->_instance=1"."$ext'>1</a></li>";
+                    $pagination .= "<li class=\"page-item\"><a class=\"page-link\"href='".$path."$this->_instance=2"."$ext'>2</a></li>";
+                    $pagination .= "..";
+                    for ($counter = $lastpage - (2 + ($adjacents * 2)); $counter <= $lastpage; $counter++) {
+                        if ($counter == $this->_page) {
+                            $pagination .= "<li class=\"page-item active\"><span class='current page-link'>$counter</span></li>";
+                        } else {
+                            $pagination .= "<li class=\"page-item\"><a class=\"page-link\"href='".$path."$this->_instance=$counter"."$ext'>$counter</a></li>";
+                        }
+                    }
+                }
+            }
+
+            if ($this->_page < $counter - 1) {
+                $pagination .= "<li class=\"page-item\"><a class=\"page-link\"href='".$path."$this->_instance=$next"."$ext'>Next</a></li>";
+            } else {
+                $pagination .= "<li class=\"page-item disabled\"><span class='disabled page-link'>Next</span></li>";
+            }
+            $pagination .= "</ul>\n";
+        }
+
+        return $pagination;
+    }
 }
