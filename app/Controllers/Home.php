@@ -42,7 +42,10 @@ class Home {
 
     public function say_name($firstname,$lastname){
 
-        echo $firstname . ' '.$lastname;
+        
+        echo $firstname . ' '.$lastname .'<br>';
+        echo 'Current URL: <br>';
+        echo current_url();
     }
 
     public function test_form() {
