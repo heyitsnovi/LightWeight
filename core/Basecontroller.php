@@ -10,6 +10,10 @@ class Basecontroller{
     private $view;
     private $twig_view;
 
+    public function __construct(){
+    	
+    }
+
     public function view($view_file , $data=[] ,$http_headers =[]){
         
         $this->view = new View($view_file,$data);
