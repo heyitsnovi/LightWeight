@@ -7,6 +7,7 @@ use Rakit\Validation\Validator;
 use Core\View;
 use Core\Models\Names;
 use Core\Twigified;
+use Core\Basecontroller;
 
 
 /*
@@ -14,7 +15,7 @@ use Core\Twigified;
 * Please make sure to import the sample_db/lightweight_demo.sql file in order to run this application 
 */
 
-class Home {
+class Home extends Basecontroller{
 
     public function index() {
 
@@ -23,6 +24,8 @@ class Home {
 
         //display the page in the browser
         new View('default', $data);
+        //or
+        //$this->view('default', $data);
 
     }
 
