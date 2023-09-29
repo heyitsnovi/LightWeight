@@ -8,6 +8,7 @@ use Core\View;
 use Core\Models\Names;
 use Core\Twigified;
 use Core\Basecontroller;
+use Core\Models\Datavalues;
 
 
 /*
@@ -89,6 +90,8 @@ class Home extends Basecontroller{
 
                 //insert data to the database.
                 Names::create(['name' => postData('name'), 'age' => postData('age')]);
+
+                Datavalues::create(['value' =>bin2hex(openssl_random_pseudo_bytes(5))]);
 
                 //redirect to home page
                 redirect(base_url());

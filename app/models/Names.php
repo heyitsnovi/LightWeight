@@ -10,4 +10,5 @@ class Names extends Model
 {
 	protected $table = 'names';
 	protected $fillable = ['name','age'];
+	protected $connection = 'default';
 }
