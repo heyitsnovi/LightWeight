@@ -3,6 +3,7 @@
 namespace Core;
 
 use Core\Constants;
+use DebugBar\StandardDebugBar;
 
 class View {
 
@@ -11,6 +12,14 @@ class View {
 
 
 	public  function __construct($view, $data = [], $http_headers = []){
+
+		$debugbar = new StandardDebugBar();
+		$debugbarRenderer = $debugbar->getJavascriptRenderer();
+
+		
+			if(Constants::isDebugBarEnabled()){
+				echo $debugbarRenderer->renderHead();
+			}
 
 		try {
 			
@@ -23,10 +32,15 @@ class View {
 				}
 
 				if(file_exists(Constants::views_dir().'/'. $view .'.php')){
-					
+
+	
 					extract($this->page_vars);
 					ob_start();
-					require_once Constants::views_dir().'/'. $view .'.php';
+
+				
+				 	require_once Constants::views_dir().'/'. $view .'.php';
+
+		
 					echo ob_get_clean();
 
 				}else{
@@ -35,7 +49,9 @@ class View {
 
 				}
 
-
+				if(Constants::isDebugBarEnabled()){
+					echo $debugbarRenderer->render();
+				}
 		}catch (Exception $e) { 
 
 			echo $e->getMessage();
